@@ -1,5 +1,11 @@
 import { inject } from '@angular/core';
-import { patchState, signalStore, withMethods, withState } from '@ngrx/signals';
+import {
+    patchState,
+    signalStore,
+    withHooks,
+    withMethods,
+    withState,
+} from '@ngrx/signals';
 import { addEntities, withEntities } from '@ngrx/signals/entities';
 import { firstValueFrom } from 'rxjs';
 
@@ -30,5 +36,10 @@ export const EntryStore = signalStore(
                 patchState(state, { loading: false });
             }
         },
-    }))
+    })),
+    withHooks({
+        onInit(store) {
+            store.loadEntries();
+        },
+    })
 );

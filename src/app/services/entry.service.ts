@@ -32,21 +32,27 @@ export class EntryService {
 
 const mockEntries: EntryDTO[] = [
     {
-        id: '1',
+        id: 'JKLÖsjlih',
         creatorName: 'John Doe',
         content: 'This is the first entry',
         creationTime: new Date(),
+        rowSpan: 1,
+        colSpan: 1,
     },
     {
-        id: '2',
+        id: 'JKhjGGlih',
         creatorName: 'Jane Doe',
         content: 'This is the second entry',
         creationTime: new Date(),
+        rowSpan: 1,
+        colSpan: 2,
     },
     {
-        id: '3',
+        id: 'JKkljulih',
         creatorName: 'John Doe',
         content: 'This is the third entry',
         creationTime: new Date(),
+        rowSpan: 2,
+        colSpan: 1,
     },
 ];

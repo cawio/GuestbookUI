@@ -3,4 +3,6 @@ export type EntryDTO = {
     creatorName: string;
     content: string;
     creationTime: Date;
+    colSpan: number;
+    rowSpan: number;
 };
