@@ -7,8 +7,8 @@
         "build": "ng build",
         "watch": "ng build --watch --configuration development",
         "test": "ng test",
-        "lint": "ng lint",
-        "lint:fix": "npx eslint . --ext .ts --fix",
+        "lint": "npx eslint .",
+        "lint:fix": "npx eslint . --fix",
         "prettier": "npx prettier --write \"**/*.{css,scss,js,json,html}\"",
         "prepare": "husky install"
     },

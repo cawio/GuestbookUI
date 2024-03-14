@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/no-unresolved
 import { TestBed } from '@angular/core/testing';
 
 import { AppComponent } from './app.component';
