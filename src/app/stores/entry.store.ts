@@ -6,7 +6,7 @@ import {
     withMethods,
     withState,
 } from '@ngrx/signals';
-import { addEntities, withEntities } from '@ngrx/signals/entities';
+import { addEntities, addEntity, withEntities } from '@ngrx/signals/entities';
 import { firstValueFrom } from 'rxjs';
 
 import { EntryDTO } from '@dtos/EntryDTO';
@@ -30,6 +30,19 @@ export const EntryStore = signalStore(
                 patchState(state, { loading: true, error: '' });
                 const entries = await firstValueFrom(entryService.getEntries());
                 patchState(state, addEntities(entries));
+            } catch (error: unknown) {
+                patchState(state, { error: error });
+            } finally {
+                patchState(state, { loading: false });
+            }
+        },
+        async createEntry(entry: EntryDTO) {
+            try {
+                patchState(state, { loading: true, error: '' });
+                const newEntry = await firstValueFrom(
+                    entryService.createEntry(entry)
+                );
+                patchState(state, addEntity(newEntry));
             } catch (error: unknown) {
                 patchState(state, { error: error });
             } finally {
