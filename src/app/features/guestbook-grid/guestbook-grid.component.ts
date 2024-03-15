@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { MatGridListModule } from '@angular/material/grid-list';
 
 import { EntryDTO } from '@dtos/EntryDTO';
-import { GuestbookEntryComponent } from '@features/guestbook-entry/guestbook-entry.component';
+import { GuestbookEntryComponent } from '@features/shared/guestbook-entry/guestbook-entry.component';
 import { EntryStore } from '@stores/entry.store';
 
 @Component({

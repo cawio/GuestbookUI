@@ -11,6 +11,7 @@ import { firstValueFrom } from 'rxjs';
 
 import { EntryDTO } from '@dtos/EntryDTO';
 import { EntryService } from '@services/entry.service';
+import { SnackbarService } from '@services/snackbar.service';
 
 type EntryStoreState = {
     loading: boolean;
@@ -24,32 +25,42 @@ export const EntryStore = signalStore(
         error: null,
     }),
     withEntities<EntryDTO>(),
-    withMethods((state, entryService = inject(EntryService)) => ({
-        async loadEntries() {
-            try {
-                patchState(state, { loading: true, error: '' });
-                const entries = await firstValueFrom(entryService.getEntries());
-                patchState(state, addEntities(entries));
-            } catch (error: unknown) {
-                patchState(state, { error: error });
-            } finally {
-                patchState(state, { loading: false });
-            }
-        },
-        async createEntry(entry: EntryDTO) {
-            try {
-                patchState(state, { loading: true, error: '' });
-                const newEntry = await firstValueFrom(
-                    entryService.createEntry(entry)
-                );
-                patchState(state, addEntity(newEntry));
-            } catch (error: unknown) {
-                patchState(state, { error: error });
-            } finally {
-                patchState(state, { loading: false });
-            }
-        },
-    })),
+    withMethods(
+        (
+            state,
+            entryService = inject(EntryService),
+            snackbar = inject(SnackbarService)
+        ) => ({
+            async loadEntries() {
+                try {
+                    patchState(state, { loading: true, error: '' });
+                    const entries = await firstValueFrom(
+                        entryService.getEntries()
+                    );
+                    patchState(state, addEntities(entries));
+                } catch (error: unknown) {
+                    patchState(state, { error: error });
+                    snackbar.openSnackBar('Error loading entries');
+                } finally {
+                    patchState(state, { loading: false });
+                }
+            },
+            async createEntry(entry: EntryDTO) {
+                try {
+                    patchState(state, { loading: true, error: '' });
+                    const newEntry = await firstValueFrom(
+                        entryService.createEntry(entry)
+                    );
+                    patchState(state, addEntity(newEntry));
+                } catch (error: unknown) {
+                    patchState(state, { error: error });
+                    snackbar.openSnackBar('Error creating entry');
+                } finally {
+                    patchState(state, { loading: false });
+                }
+            },
+        })
+    ),
     withHooks({
         onInit(store) {
             store.loadEntries();

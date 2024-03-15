@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 
+import { AdminDashboardComponent } from '@features/admin-dashboard/admin-dashboard.component';
 import { GuestbookEntryCreatorComponent } from '@features/guestbook-entry-creator/guestbook-entry-creator.component';
 import { GuestbookGridComponent } from '@features/guestbook-grid/guestbook-grid.component';
 
@@ -15,7 +16,7 @@ export const routes: Routes = [
     },
     {
         path: 'admin',
-        component: GuestbookGridComponent,
+        component: AdminDashboardComponent,
     },
     {
         path: 'guestbook/add-entry',

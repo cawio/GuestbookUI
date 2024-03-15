@@ -3,7 +3,8 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterOutlet } from '@angular/router';
 
-import { PageHeaderComponent } from '@features/page-header/page-header.component';
+import { LoadingSpinnerComponent } from '@features/shared/loading-spinner/loading-spinner.component';
+import { PageHeaderComponent } from '@features/shared/page-header/page-header.component';
 
 @Component({
     selector: 'app-root',
@@ -13,6 +14,7 @@ import { PageHeaderComponent } from '@features/page-header/page-header.component
         MatToolbarModule,
         MatSidenavModule,
         PageHeaderComponent,
+        LoadingSpinnerComponent,
     ],
     templateUrl: './app.component.html',
     styleUrl: './app.component.scss',
