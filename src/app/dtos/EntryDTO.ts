@@ -1,8 +1,7 @@
 export type EntryDTO = {
     id: string;
+    title: string;
     creatorName: string;
-    content: string;
+    message: string;
     creationTime: Date;
-    colSpan: number;
-    rowSpan: number;
 };

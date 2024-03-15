@@ -1,10 +1,10 @@
 <mat-card>
     <mat-card-header>
-        <mat-card-title>Guestbook entry</mat-card-title>
+        <mat-card-title>{{ entry.title }}</mat-card-title>
         <mat-card-subtitle>{{ entry.creatorName }}</mat-card-subtitle>
     </mat-card-header>
-    <div class="left-right-pad">
-        {{ entry.content }}
-    </div>
+    <mat-card-content>
+        <p>{{ entry.message }}</p>
+    </mat-card-content>
     <mat-card-footer class="footer">{{ '#' + entry.id }}</mat-card-footer>
 </mat-card>

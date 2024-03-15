@@ -5,8 +5,8 @@
 >
     @for (entry of entries(); track entry.id) {
         <mat-grid-tile
-            [colspan]="entry.colSpan"
-            [rowspan]="entry.rowSpan"
+            [colspan]="calculateCols(entry)"
+            [rowspan]="calculateRows(entry)"
             [style.background]="'red'"
         >
             <app-guestbook-entry [entry]="entry"></app-guestbook-entry>

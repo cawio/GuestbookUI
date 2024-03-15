@@ -33,26 +33,24 @@ export class EntryService {
 const mockEntries: EntryDTO[] = [
     {
         id: 'JKLÖsjlih',
+        title: 'Mock Entry 3',
+        message: 'Short message.',
         creatorName: 'John Doe',
-        content: 'This is the first entry',
         creationTime: new Date(),
-        rowSpan: 1,
-        colSpan: 1,
     },
     {
         id: 'JKhjGGlih',
-        creatorName: 'Jane Doe',
-        content: 'This is the second entry',
+        title: 'Mock Entry 2',
+        message:
+            'This is another mock entry message that is longer than 100 characters. We need to test if the grid will display this entry in two rows.',
+        creatorName: 'Flynn Rider',
         creationTime: new Date(),
-        rowSpan: 1,
-        colSpan: 2,
     },
     {
         id: 'JKkljulih',
-        creatorName: 'John Doe',
-        content: 'This is the third entry',
+        title: 'Mock Entry 1. With a long title. We need to be larger 30',
+        message: 'This is a mock entry message. With a long title.',
+        creatorName: 'Dr. Dr. med. Flyman',
         creationTime: new Date(),
-        rowSpan: 2,
-        colSpan: 1,
     },
 ];

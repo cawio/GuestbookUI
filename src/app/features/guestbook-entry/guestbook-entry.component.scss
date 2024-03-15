@@ -1,17 +1,16 @@
 :host {
     width: 100%;
-}
-
-.left-right-pad {
-    padding: 0 16px;
-}
-
-.card-content {
-    // TODO(bersi): figure out how to make this work
     height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+mat-card {
+    flex: 1;
 }
 
 .footer {
+    margin-top: auto;
     padding: 16px;
     opacity: 0.5;
     display: flex;

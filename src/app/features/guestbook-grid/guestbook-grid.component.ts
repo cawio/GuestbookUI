@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { MatGridListModule } from '@angular/material/grid-list';
 
+import { EntryDTO } from '@dtos/EntryDTO';
 import { GuestbookEntryComponent } from '@features/guestbook-entry/guestbook-entry.component';
 import { EntryStore } from '@stores/entry.store';
 
@@ -14,4 +15,12 @@ import { EntryStore } from '@stores/entry.store';
 export class GuestbookGridComponent {
     private readonly entryStore = inject(EntryStore);
     public readonly entries = this.entryStore.entities;
+
+    calculateCols(entry: EntryDTO) {
+        return entry.title.length > 30 ? 2 : 1;
+    }
+
+    calculateRows(entry: EntryDTO) {
+        return entry.message.length > 100 ? 2 : 1;
+    }
 }
