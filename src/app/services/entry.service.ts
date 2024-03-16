@@ -144,4 +144,12 @@ export class EntryService {
 
         return of(true).pipe(delay(1000));
     }
+
+    deleteEntries(ids: string[]): Observable<boolean> {
+        if (!ids.length) {
+            return of(false).pipe(delay(1000));
+        }
+
+        return of(true).pipe(delay(1000));
+    }
 }

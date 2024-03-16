@@ -1,0 +1,9 @@
+<mat-selection-list (selectionChange)="onSelectionChange($event)">
+    @for (entry of entries(); track entry.id) {
+        <mat-list-item>
+            <mat-list-option [value]="entry">{{
+                '#' + entry.id
+            }}</mat-list-option>
+        </mat-list-item>
+    }
+</mat-selection-list>

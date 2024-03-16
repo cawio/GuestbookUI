@@ -6,7 +6,13 @@ import {
     withMethods,
     withState,
 } from '@ngrx/signals';
-import { addEntities, addEntity, withEntities } from '@ngrx/signals/entities';
+import {
+    addEntities,
+    addEntity,
+    removeEntities,
+    removeEntity,
+    withEntities,
+} from '@ngrx/signals/entities';
 import { firstValueFrom } from 'rxjs';
 
 import { EntryDTO } from '@dtos/EntryDTO';
@@ -55,6 +61,32 @@ export const EntryStore = signalStore(
                 } catch (error: unknown) {
                     patchState(state, { error: error });
                     snackbar.openSnackBar('Error creating entry');
+                } finally {
+                    patchState(state, { loading: false });
+                }
+            },
+            async deleteEntry(id: string) {
+                try {
+                    patchState(state, { loading: true, error: '' });
+                    await firstValueFrom(entryService.deleteEntry(id));
+                    patchState(state, removeEntity(id));
+                    snackbar.openSnackBar('Entry deleted');
+                } catch (error: unknown) {
+                    patchState(state, { error: error });
+                    snackbar.openSnackBar('Error deleting entry');
+                } finally {
+                    patchState(state, { loading: false });
+                }
+            },
+            async deleteEntries(ids: string[]) {
+                try {
+                    patchState(state, { loading: true, error: '' });
+                    await firstValueFrom(entryService.deleteEntries(ids));
+                    patchState(state, removeEntities(ids));
+                    snackbar.openSnackBar('Entries deleted');
+                } catch (error: unknown) {
+                    patchState(state, { error: error });
+                    snackbar.openSnackBar('Error deleting entries');
                 } finally {
                     patchState(state, { loading: false });
                 }
