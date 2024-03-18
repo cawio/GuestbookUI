@@ -46,7 +46,7 @@ export const EntryStore = signalStore(
                     patchState(state, addEntities(entries));
                 } catch (error: unknown) {
                     patchState(state, { error: error });
-                    snackbar.openSnackBar('Error loading entries');
+                    snackbar.open('Error loading entries');
                 } finally {
                     patchState(state, { loading: false });
                 }
@@ -60,7 +60,7 @@ export const EntryStore = signalStore(
                     patchState(state, addEntity(newEntry));
                 } catch (error: unknown) {
                     patchState(state, { error: error });
-                    snackbar.openSnackBar('Error creating entry');
+                    snackbar.open('Error creating entry');
                 } finally {
                     patchState(state, { loading: false });
                 }
@@ -70,10 +70,10 @@ export const EntryStore = signalStore(
                     patchState(state, { loading: true, error: '' });
                     await firstValueFrom(entryService.deleteEntry(id));
                     patchState(state, removeEntity(id));
-                    snackbar.openSnackBar('Entry deleted');
+                    snackbar.open('Entry deleted');
                 } catch (error: unknown) {
                     patchState(state, { error: error });
-                    snackbar.openSnackBar('Error deleting entry');
+                    snackbar.open('Error deleting entry');
                 } finally {
                     patchState(state, { loading: false });
                 }
@@ -83,10 +83,10 @@ export const EntryStore = signalStore(
                     patchState(state, { loading: true, error: '' });
                     await firstValueFrom(entryService.deleteEntries(ids));
                     patchState(state, removeEntities(ids));
-                    snackbar.openSnackBar('Entries deleted');
+                    snackbar.open('Entries deleted');
                 } catch (error: unknown) {
                     patchState(state, { error: error });
-                    snackbar.openSnackBar('Error deleting entries');
+                    snackbar.open('Error deleting entries');
                 } finally {
                     patchState(state, { loading: false });
                 }

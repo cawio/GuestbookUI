@@ -28,7 +28,7 @@ describe('SnackbarService', () => {
     it('should open a snackbar', () => {
         const message = 'Test message';
         const action = 'Action';
-        service.openSnackBar(message, action);
+        service.open(message, action);
         expect(snackBar.open).toHaveBeenCalledWith(message, action, {
             duration: 2000,
         });
@@ -36,7 +36,7 @@ describe('SnackbarService', () => {
 
     it('should open a snackbar without action', () => {
         const message = 'Test message';
-        service.openSnackBar(message);
+        service.open(message);
         expect(snackBar.open).toHaveBeenCalledWith(message, undefined, {
             duration: 2000,
         });
