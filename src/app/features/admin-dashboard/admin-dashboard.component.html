@@ -1,9 +1,6 @@
-<mat-selection-list (selectionChange)="onSelectionChange($event)">
-    @for (entry of entries(); track entry.id) {
-        <mat-list-item>
-            <mat-list-option [value]="entry">{{
-                '#' + entry.id
-            }}</mat-list-option>
-        </mat-list-item>
+<div class="main-container">
+    <app-entry-selection-list [entries]="entries()"></app-entry-selection-list>
+    @if (selectedEntry()) {
+        <app-guestbook-entry [entry]="selectedEntry()!"></app-guestbook-entry>
     }
-</mat-selection-list>
+</div>
