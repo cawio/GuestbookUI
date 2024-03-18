@@ -35,11 +35,18 @@ export class LoginComponent {
         });
     }
 
-    onSubmit(): void {
-        console.log(this.loginForm.value);
+    async onSubmit(): Promise<void> {
+        const email = this.loginForm.get('email')?.value;
+        const password = this.loginForm.get('password')?.value;
 
-        // TODO: Implement login logic
-        this.appStore.login();
-        this.router.navigate(['/dashboard']);
+        if (!email || !password || this.loginForm.invalid) {
+            return;
+        }
+
+        await this.appStore.login(email, password);
+
+        if (this.appStore.loggedIn()) {
+            this.router.navigate(['/dashboard']);
+        }
     }
 }
