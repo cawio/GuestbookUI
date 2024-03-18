@@ -18,7 +18,7 @@ export const routes: Routes = [
         component: GuestbookGridComponent,
     },
     {
-        path: 'admin',
+        path: 'dashboard',
         canActivate: [authGuard],
         component: AdminDashboardComponent,
     },
