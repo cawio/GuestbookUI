@@ -1,16 +1,14 @@
 <h2>Guestbook Entries</h2>
+
 <mat-selection-list
     (selectionChange)="onSelectionChange($event)"
     style="width: 500px"
 >
     @for (entry of entries; track entry.id) {
-        <mat-list-option
-            lines="4"
-            [value]="entry"
-        >
+        <mat-list-option [value]="entry">
             <h3 matListItemTitle>{{ entry.title }}</h3>
-            {{ entry.message }}
-            <p matListItemMeta>
+            <p matListItemLine>{{ entry.message }}</p>
+            <p matListItemLine>
                 <span>By: {{ entry.creatorName }}</span>
                 <span>Date: {{ entry.creationTime | date: 'short' }}</span>
             </p>
