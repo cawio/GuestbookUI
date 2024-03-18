@@ -30,7 +30,7 @@ export class LoginComponent {
         private fb: FormBuilder
     ) {
         this.loginForm = this.fb.group({
-            username: [''],
+            email: [''],
             password: [''],
         });
     }
