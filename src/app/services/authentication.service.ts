@@ -4,18 +4,19 @@ import { Observable } from 'rxjs';
 
 import { UserDTO } from '@dtos/UserDTO';
 import { environment } from '@env/environment';
+import { SqidsUtility } from '@utils/SqidsUtil';
 
 @Injectable({
     providedIn: 'root',
 })
 export class AuthenticationService {
-    private readonly apiUrl = environment.apiUrl;
+    readonly apiUrl = environment.apiUrl;
 
     constructor(private http: HttpClient) {}
 
     login(username: string, password: string): Observable<string> {
         const user: UserDTO = {
-            id: '',
+            id: SqidsUtility.encode([0]),
             username,
             password,
         };
@@ -26,7 +27,7 @@ export class AuthenticationService {
     }
 
     validateToken(token: string): Observable<boolean> {
-        return this.http.post<boolean>(`${this.apiUrl}/auth/validate-token`, {
+        return this.http.post<boolean>(`${this.apiUrl}/auth/tokenExpired`, {
             token,
         });
     }

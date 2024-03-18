@@ -25,7 +25,8 @@
             "@features/*": ["./src/app/features/*"],
             "@services/*": ["./src/app/services/*"],
             "@dtos/*": ["./src/app/dtos/*"],
-            "@stores/*": ["./src/app/stores/*"]
+            "@stores/*": ["./src/app/stores/*"],
+            "@utils/*": ["./src/app/utils/*"]
         }
     },
     "angularCompilerOptions": {
