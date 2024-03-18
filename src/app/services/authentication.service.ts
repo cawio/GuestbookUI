@@ -27,8 +27,8 @@ export class AuthenticationService {
     }
 
     validateToken(token: string): Observable<boolean> {
-        return this.http.post<boolean>(`${this.apiUrl}/auth/tokenExpired`, {
-            token,
-        });
+        return this.http.get<boolean>(
+            `${this.apiUrl}/auth/validate-token/${token}`
+        );
     }
 }
