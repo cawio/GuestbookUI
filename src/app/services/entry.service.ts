@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { EntryDTO } from '@dtos/EntryDTO';
 import { environment } from '@env/environment';
+import { AppStore } from '@stores/app.store';
 import { SqidsUtility } from '@utils/SqidsUtil';
 
 @Injectable({
@@ -11,6 +12,7 @@ import { SqidsUtility } from '@utils/SqidsUtil';
 })
 export class EntryService {
     readonly apiUrl = environment.apiUrl;
+    private readonly appStore = inject(AppStore);
 
     constructor(private http: HttpClient) {}
 
@@ -20,10 +22,6 @@ export class EntryService {
 
     createEntry(entry: EntryDTO): Observable<EntryDTO> {
         return this.http.post<EntryDTO>(`${this.apiUrl}/entry`, entry);
-    }
-
-    deleteEntry(id: string): Observable<boolean> {
-        return this.http.delete<boolean>(`${this.apiUrl}/entry/${id}`);
     }
 
     deleteEntries(ids: string[]): Observable<boolean> {
@@ -37,6 +35,10 @@ export class EntryService {
             return decodedId[0];
         });
         const encodedIds = SqidsUtility.encode(decodedIds);
-        return this.http.delete<boolean>(`${this.apiUrl}/entry/${encodedIds}`);
+        return this.http.delete<boolean>(`${this.apiUrl}/entry/${encodedIds}`, {
+            headers: {
+                Authorization: `Bearer ${this.appStore.token()}`,
+            },
+        });
     }
 }

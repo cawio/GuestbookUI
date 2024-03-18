@@ -11,7 +11,6 @@ import {
     addEntities,
     addEntity,
     removeEntities,
-    removeEntity,
     withEntities,
 } from '@ngrx/signals/entities';
 import { firstValueFrom } from 'rxjs';
@@ -64,22 +63,10 @@ export const EntryStore = signalStore(
                         entryService.createEntry(entry)
                     );
                     patchState(state, addEntity(newEntry));
+                    snackbar.open('Entry created', 'close');
                 } catch (error: unknown) {
                     patchState(state, { error: error });
                     snackbar.open('Error creating entry');
-                } finally {
-                    patchState(state, { loading: false });
-                }
-            },
-            async deleteEntry(id: string) {
-                try {
-                    patchState(state, { loading: true, error: '' });
-                    await firstValueFrom(entryService.deleteEntry(id));
-                    patchState(state, removeEntity(id));
-                    snackbar.open('Entry deleted');
-                } catch (error: unknown) {
-                    patchState(state, { error: error });
-                    snackbar.open('Error deleting entry');
                 } finally {
                     patchState(state, { loading: false });
                 }
