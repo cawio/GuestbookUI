@@ -1,10 +1,14 @@
-<mat-card>
-    <mat-card-header>
-        <mat-card-title>{{ entry.title }}</mat-card-title>
-        <mat-card-subtitle>{{ entry.creatorName }}</mat-card-subtitle>
-    </mat-card-header>
-    <mat-card-content>
-        <p>{{ entry.message }}</p>
-    </mat-card-content>
-    <mat-card-footer class="footer">{{ '#' + entry.id }}</mat-card-footer>
-</mat-card>
+@if (entry) {
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>{{ entry.title }}</mat-card-title>
+            <mat-card-subtitle>{{ entry.creatorName }}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+            <p>{{ entry.message }}</p>
+        </mat-card-content>
+        <mat-card-footer class="footer">{{ '#' + entry.id }}</mat-card-footer>
+    </mat-card>
+} @else {
+    <p>Nothing to show. 🥺</p>
+}

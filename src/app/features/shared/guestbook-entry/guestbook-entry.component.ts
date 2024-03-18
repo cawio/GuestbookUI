@@ -11,10 +11,14 @@ import { EntryDTO } from '@dtos/EntryDTO';
     styleUrl: './guestbook-entry.component.scss',
 })
 export class GuestbookEntryComponent {
-    @Input({ required: true }) entry: EntryDTO = {} as EntryDTO;
+    @Input({ required: true }) entry: EntryDTO | undefined;
     @Output() deleteEntry = new EventEmitter<string>();
 
     onDeleteEntry(): void {
+        if (!this.entry) {
+            return;
+        }
+
         this.deleteEntry.emit(this.entry.id);
     }
 }

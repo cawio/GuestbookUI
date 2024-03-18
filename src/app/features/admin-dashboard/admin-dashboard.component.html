@@ -1,6 +1,13 @@
 <div class="main-container">
-    <app-entry-selection-list [entries]="entries()"></app-entry-selection-list>
-    @if (selectedEntry()) {
-        <app-guestbook-entry [entry]="selectedEntry()!"></app-guestbook-entry>
-    }
+    <app-entry-selection-list
+        [entries]="entries()"
+        [menuItems]="menuItems"
+        (focusedEntryChanged)="onFocusedEntryChanged($event)"
+        (selectedEntriesChanged)="onSelectedEntriesChanged($event)"
+        (refreshEntries)="onRefreshEntries()"
+    ></app-entry-selection-list>
+    <app-guestbook-entry
+        style="height: 50%"
+        [entry]="focusedEntry()"
+    ></app-guestbook-entry>
 </div>

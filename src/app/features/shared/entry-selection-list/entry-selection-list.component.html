@@ -1,17 +1,45 @@
-<h2>Guestbook Entries</h2>
-
-<mat-selection-list
-    (selectionChange)="onSelectionChange($event)"
-    style="width: 500px"
->
+<div class="header">
+    <h2>Guestbook Entries</h2>
+    @if (true) {
+        <button
+            mat-icon-button
+            [mat-menu-trigger-for]="menu"
+        >
+            <mat-icon>more_vert</mat-icon>
+        </button>
+    }
+</div>
+<mat-menu #menu>
+    <button
+        mat-menu-item
+        (click)="onRefreshEntries()"
+    >
+        Refresh
+    </button>
+    @for (item of menuItems; track item.label) {
+        <button
+            mat-menu-item
+            (click)="item.action(selectedEntries)"
+        >
+            {{ item.label }}
+        </button>
+    }
+</mat-menu>
+<mat-selection-list (selectionChange)="onSelectionChange($event)">
     @for (entry of entries; track entry.id) {
-        <mat-list-option [value]="entry">
+        <mat-list-option
+            [value]="entry"
+            (mouseenter)="onFocusedEntryChanged(entry)"
+            (mouseleave)="onFocusedEntryChanged(undefined)"
+        >
             <h3 matListItemTitle>{{ entry.title }}</h3>
-            <p matListItemLine>{{ entry.message }}</p>
+            {{ entry.message }}
             <p matListItemLine>
                 <span>By: {{ entry.creatorName }}</span>
                 <span>Date: {{ entry.creationTime | date: 'short' }}</span>
             </p>
         </mat-list-option>
+    } @empty {
+        <mat-list-option disabled> No entries found </mat-list-option>
     }
 </mat-selection-list>
