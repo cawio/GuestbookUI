@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { inject } from '@angular/core';
 import {
     patchState,
@@ -41,12 +42,17 @@ export const EntryStore = signalStore(
                 try {
                     patchState(state, { loading: true, error: '' });
                     const entries = await firstValueFrom(
-                        entryService.getEntries()
+                        entryService.getEntries().pipe()
                     );
                     patchState(state, addEntities(entries));
                 } catch (error: unknown) {
                     patchState(state, { error: error });
-                    snackbar.open('Error loading entries');
+                    if (error instanceof HttpErrorResponse) {
+                        snackbar.open(
+                            'Error loading entries',
+                            error.statusText
+                        );
+                    }
                 } finally {
                     patchState(state, { loading: false });
                 }
