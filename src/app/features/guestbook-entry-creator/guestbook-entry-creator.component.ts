@@ -3,6 +3,7 @@ import {
     FormBuilder,
     FormControl,
     FormGroup,
+    FormGroupDirective,
     ReactiveFormsModule,
     Validators,
 } from '@angular/forms';
@@ -54,19 +55,25 @@ export class GuestbookEntryCreatorComponent {
         });
     }
 
-    onSubmit() {
+    async onSubmit(formDirective: FormGroupDirective): Promise<void> {
         if (this.form.invalid) {
             this.snackbar.open('Please fill out the form correctly', 'close');
             return;
         }
 
-        this.entryStore.createEntry({
+        await this.entryStore.createEntry({
             id: SqidsUtility.encode([0]),
             title: this.form.value.title ?? '',
             creatorName: this.form.value.name ?? '',
             message: this.form.value.message ?? '',
             creationTime: new Date(),
         });
+
+        this.form.reset();
+
+        // * This is a workaround for the issue with the form not resetting the pristine state
+        // * see: https://stackoverflow.com/a/48217303 and https://github.com/angular/components/issues/4190
+        formDirective.resetForm();
     }
 }
 

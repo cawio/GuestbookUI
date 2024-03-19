@@ -1,7 +1,8 @@
 <form
     class="form-container"
     [formGroup]="form"
-    (ngSubmit)="onSubmit()"
+    (ngSubmit)="onSubmit(formDirective)"
+    #formDirective="ngForm"
 >
     <h2>Create a new entry</h2>
     <mat-form-field>
