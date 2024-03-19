@@ -1,0 +1,19 @@
+@for (route of routes; track route.label) {
+    <a
+        mat-stroked-button
+        [routerLink]="route.route"
+        [color]="isActive(route.route) ? 'primary' : 'accent'"
+        [textContent]="route.label"
+    >
+    </a>
+}
+<button
+    style="margin-top: auto"
+    mat-fab
+    extended
+    color="warn"
+    (click)="onLogout()"
+>
+    Logout
+    <mat-icon>exit_to_app</mat-icon>
+</button>

@@ -1,1 +1,18 @@
-<p>{{ title }}</p>
+<mat-toolbar color="accent">
+    @if (loggedIn()) {
+        <button
+            mat-icon-button
+            (click)="onMenuButtonClick()"
+        >
+            <mat-icon>menu</mat-icon>
+        </button>
+    }
+    <h1>{{ title }}</h1>
+    <span class="spacer"></span>
+    <app-qr-code
+        [value]="addEntryQrCodeConfig.value"
+        [size]="addEntryQrCodeConfig.size"
+        [margin]="addEntryQrCodeConfig.margin"
+        routerLink="/guestbook/add-entry"
+    ></app-qr-code>
+</mat-toolbar>

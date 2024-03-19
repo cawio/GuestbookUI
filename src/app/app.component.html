@@ -1,9 +1,16 @@
-<mat-toolbar>
-    <app-page-header />
-</mat-toolbar>
+<app-page-header></app-page-header>
 <app-loading-spinner />
-<mat-drawer-container>
-    <mat-drawer></mat-drawer>
+<mat-drawer-container
+    class="container"
+    autosize
+>
+    <mat-drawer
+        class="drawer"
+        mode="side"
+        [opened]="showDrawer()"
+    >
+        <app-navigation></app-navigation>
+    </mat-drawer>
     <div class="main-content">
         <router-outlet></router-outlet>
     </div>

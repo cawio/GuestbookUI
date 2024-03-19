@@ -1,4 +1,5 @@
 import { inject } from '@angular/core';
+import { Router } from '@angular/router';
 import {
     patchState,
     signalStore,
@@ -18,12 +19,14 @@ export const AppStore = signalStore(
         token: localStorage.getItem('token') ?? undefined,
         loggedIn: false,
         error: undefined as unknown | undefined,
+        showDrawer: false,
     }),
     withMethods(
         (
             state,
             authService = inject(AuthenticationService),
-            snackbar = inject(SnackbarService)
+            snackbar = inject(SnackbarService),
+            router = inject(Router)
         ) => ({
             async login(username: string, password: string) {
                 try {
@@ -42,9 +45,14 @@ export const AppStore = signalStore(
                 }
             },
             logout() {
-                patchState(state, { token: undefined, loggedIn: false });
+                patchState(state, {
+                    token: undefined,
+                    loggedIn: false,
+                    showDrawer: false,
+                });
                 localStorage.removeItem('token');
                 snackbar.open('Logged out');
+                router.navigate(['/guestbook']);
             },
             updateLocalStorage: rxMethod<string | undefined>(
                 pipe(
@@ -66,6 +74,9 @@ export const AppStore = signalStore(
                 return await firstValueFrom(
                     authService.validateToken(state.token()!)
                 );
+            },
+            toggleDrawer() {
+                patchState(state, { showDrawer: !state.showDrawer() });
             },
         })
     ),

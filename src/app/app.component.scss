@@ -1,5 +1,13 @@
 .main-content {
     padding: 20px;
-    // margin-top: 20px;
-    // margin-bottom: 20px;
+}
+
+.drawer {
+    padding: 20px;
+    min-width: 240px;
+}
+
+.container {
+    width: 100%;
+    height: calc(100% - 64px);
 }
