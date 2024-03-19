@@ -53,7 +53,6 @@ export class GuestbookEntryCreatorComponent {
     }
 
     onSubmit() {
-        console.log('submitting form', this.form.value);
         if (this.form.invalid) {
             this.snackbar.open('Please fill out the form correctly', 'close');
             return;
