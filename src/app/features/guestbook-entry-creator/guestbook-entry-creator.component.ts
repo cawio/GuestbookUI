@@ -40,14 +40,16 @@ export class GuestbookEntryCreatorComponent {
             title: this.fb.control('', [
                 Validators.required,
                 Validators.minLength(3),
-            ]),
-            message: this.fb.control('', [
-                Validators.required,
-                Validators.minLength(10),
+                Validators.maxLength(50),
             ]),
             name: this.fb.control('', [
                 Validators.required,
                 Validators.minLength(3),
+                Validators.maxLength(50),
+            ]),
+            message: this.fb.control('', [
+                Validators.required,
+                Validators.minLength(10),
             ]),
         });
     }
