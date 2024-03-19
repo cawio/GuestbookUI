@@ -1,5 +1,5 @@
 export const environment = {
     production: true,
-    apiUrl: 'http://localhost:3000/api',
-    frontendUrl: 'http://localhost:4200',
+    apiUrl: 'https://guestbookapi.fly.dev/api',
+    frontendUrl: 'https://guestbookui.fly.dev',
 } as const;
