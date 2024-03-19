@@ -24,7 +24,7 @@ export class EntryService {
         return this.http.post<EntryDTO>(`${this.apiUrl}/entry`, entry);
     }
 
-    deleteEntries(ids: string[]): Observable<boolean> {
+    deleteEntries(ids: string[]): Observable<string> {
         const decodedIds = ids.map((id) => {
             const decodedId = SqidsUtility.decode(id);
 
@@ -35,7 +35,8 @@ export class EntryService {
             return decodedId[0];
         });
         const encodedIds = SqidsUtility.encode(decodedIds);
-        return this.http.delete<boolean>(`${this.apiUrl}/entry/${encodedIds}`, {
+        return this.http.delete(`${this.apiUrl}/entry/${encodedIds}`, {
+            responseType: 'text',
             headers: {
                 Authorization: `Bearer ${this.appStore.token()}`,
             },
