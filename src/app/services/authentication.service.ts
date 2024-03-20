@@ -3,8 +3,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { UserDTO } from '@dtos/UserDTO';
-import { environment } from '@env/environment';
 import { SqidsUtility } from '@utils/SqidsUtil';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
     providedIn: 'root',

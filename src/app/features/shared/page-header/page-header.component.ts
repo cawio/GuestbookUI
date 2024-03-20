@@ -4,12 +4,12 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterLink } from '@angular/router';
 
-import { environment } from '@env/environment';
 import {
     QrCodeComponent,
     QRCodeConfig,
 } from '@features/shared/qr-code/qr-code.component';
 import { AppStore } from '@stores/app.store';
+import { environment } from 'src/environments/environment';
 
 @Component({
     selector: 'app-page-header',

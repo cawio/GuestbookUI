@@ -3,9 +3,9 @@ import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { EntryDTO } from '@dtos/EntryDTO';
-import { environment } from '@env/environment';
 import { AppStore } from '@stores/app.store';
 import { SqidsUtility } from '@utils/SqidsUtil';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
     providedIn: 'root',
