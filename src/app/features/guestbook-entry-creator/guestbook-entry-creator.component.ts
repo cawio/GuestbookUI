@@ -11,6 +11,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { Router } from '@angular/router';
 
 import { SnackbarService } from '@services/snackbar.service';
 import { EntryStore } from '@stores/entry.store';
@@ -35,7 +36,8 @@ export class GuestbookEntryCreatorComponent {
 
     constructor(
         private fb: FormBuilder,
-        private snackbar: SnackbarService
+        private snackbar: SnackbarService,
+        private router: Router
     ) {
         this.form = this.fb.group<EntryFrom>({
             title: this.fb.control('', [
@@ -61,13 +63,17 @@ export class GuestbookEntryCreatorComponent {
             return;
         }
 
-        await this.entryStore.createEntry({
-            id: SqidsUtility.encode([0]),
-            title: this.form.value.title ?? '',
-            creatorName: this.form.value.name ?? '',
-            message: this.form.value.message ?? '',
-            creationTime: new Date(),
-        });
+        await this.entryStore
+            .createEntry({
+                id: SqidsUtility.encode([0]),
+                title: this.form.value.title ?? '',
+                creatorName: this.form.value.name ?? '',
+                message: this.form.value.message ?? '',
+                creationTime: new Date(),
+            })
+            .then(() => {
+                this.router.navigate(['/guestbook']);
+            });
 
         this.form.reset();
 

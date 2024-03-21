@@ -1,14 +1,17 @@
 <mat-grid-list
-    cols="4"
-    rowHeight="2:1"
+    [cols]="cols()"
+    [rowHeight]="rowHeight + 'px'"
     gutterSize="1em"
 >
-    @for (entry of entries(); track entry.id) {
+    @for (value of entries(); track value.entry.id) {
         <mat-grid-tile
-            [colspan]="calculateCols(entry)"
-            [rowspan]="calculateRows(entry)"
+            [colspan]="value.cols"
+            [rowspan]="value.rows"
         >
-            <app-guestbook-entry [entry]="entry"></app-guestbook-entry>
+            <app-guestbook-entry
+                [entry]="value.entry"
+                [maxContentHeight]="rowHeight * value.rows - 120"
+            ></app-guestbook-entry>
         </mat-grid-tile>
     }
 </mat-grid-list>
