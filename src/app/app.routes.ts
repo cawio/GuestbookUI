@@ -16,19 +16,23 @@ export const routes: Routes = [
     },
     {
         path: 'guestbook',
+        title: 'Guestbook',
         component: GuestbookGridComponent,
     },
     {
         path: 'guestbook/add-entry',
+        title: 'Add Guestbook Entry',
         component: GuestbookEntryCreatorComponent,
     },
     {
         path: 'dashboard',
+        title: 'Dashboard',
         canActivate: [authGuard],
         component: AdminDashboardComponent,
     },
     {
         path: 'login',
+        title: 'Login',
         component: LoginComponent,
     },
     {
