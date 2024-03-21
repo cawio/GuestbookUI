@@ -63,23 +63,30 @@ export class GuestbookEntryCreatorComponent {
             return;
         }
 
+        const title = this.form.value.title?.trim();
+        const name = this.form.value.name?.trim();
+        const message = this.form.value.message?.trim();
+
+        if (!title || !name || !message) {
+            this.snackbar.open('Seems like you tried to be cheeky', 'close');
+            return;
+        }
+
         await this.entryStore
             .createEntry({
                 id: SqidsUtility.encode([0]),
-                title: this.form.value.title ?? '',
-                creatorName: this.form.value.name ?? '',
-                message: this.form.value.message ?? '',
+                title: title,
+                creatorName: name,
+                message: message,
                 creationTime: new Date(),
             })
             .then(() => {
                 this.router.navigate(['/guestbook']);
+                this.form.reset();
+                // * This is a workaround for the issue with the form not resetting the pristine state
+                // * see: https://stackoverflow.com/a/48217303 and https://github.com/angular/components/issues/4190
+                formDirective.resetForm();
             });
-
-        this.form.reset();
-
-        // * This is a workaround for the issue with the form not resetting the pristine state
-        // * see: https://stackoverflow.com/a/48217303 and https://github.com/angular/components/issues/4190
-        formDirective.resetForm();
     }
 }
 
