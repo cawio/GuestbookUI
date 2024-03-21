@@ -12,6 +12,7 @@ import { EntryDTO } from '@dtos/EntryDTO';
 })
 export class GuestbookEntryComponent {
     @Input({ required: true }) entry: EntryDTO | undefined;
+    @Input() maxContentHeight: number | undefined = undefined;
     @Output() deleteEntry = new EventEmitter<string>();
 
     onDeleteEntry(): void {
@@ -20,5 +21,9 @@ export class GuestbookEntryComponent {
         }
 
         this.deleteEntry.emit(this.entry.id);
+    }
+
+    get contentHeight(): string {
+        return this.maxContentHeight ? `${this.maxContentHeight}px` : 'auto';
     }
 }
