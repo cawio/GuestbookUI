@@ -4,7 +4,7 @@
             <mat-card-title>{{ entry.title }}</mat-card-title>
             <mat-card-subtitle>{{ entry.creatorName }}</mat-card-subtitle>
         </mat-card-header>
-        <mat-card-content>
+        <mat-card-content [style.maxHeight]="contentHeight">
             <p>{{ entry.message }}</p>
         </mat-card-content>
         <mat-card-footer class="footer">{{ '#' + entry.id }}</mat-card-footer>

@@ -22,3 +22,14 @@ mat-card {
     display: flex;
     justify-content: flex-end;
 }
+
+mat-card-title {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; // this doesnt work because we cannot set a width
+}
+
+mat-card-content {
+    overflow: auto;
+    scrollbar-width: thin;
+}
