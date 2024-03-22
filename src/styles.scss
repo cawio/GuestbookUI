@@ -12,8 +12,7 @@
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
 $GuestBookUI-primary: mat.define-palette(mat.$teal-palette);
-$GuestBookUI-accent: mat.define-palette(mat.$teal-palette, A200, A100, A400);
-
+$GuestBookUI-accent: mat.define-palette(mat.$teal-palette, 100, 200);
 // The warn palette is optional (defaults to red).
 $GuestBookUI-warn: mat.define-palette(mat.$red-palette);
 
