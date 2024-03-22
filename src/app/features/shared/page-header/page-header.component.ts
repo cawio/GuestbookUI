@@ -25,8 +25,9 @@ import { environment } from 'src/environments/environment';
     styleUrl: './page-header.component.scss',
 })
 export class PageHeaderComponent {
-    appStore = inject(AppStore);
+    private readonly appStore = inject(AppStore);
     loggedIn = this.appStore.loggedIn;
+    isLightTheme = this.appStore.isLightTheme;
     title = 'Guestbook';
     addEntryQrCodeConfig: QRCodeConfig = {
         value: `${environment.frontendUrl}/guestbook/add-entry`,
@@ -39,5 +40,9 @@ export class PageHeaderComponent {
 
     onMenuButtonClick() {
         this.appStore.toggleDrawer();
+    }
+
+    onToggleThemeButtonClick() {
+        this.appStore.toggleTheme();
     }
 }
