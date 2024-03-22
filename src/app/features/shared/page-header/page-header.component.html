@@ -15,4 +15,11 @@
         [margin]="addEntryQrCodeConfig.margin"
         routerLink="/guestbook/add-entry"
     ></app-qr-code>
+    <!-- toggle theme button -->
+    <button
+        mat-icon-button
+        (click)="onToggleThemeButtonClick()"
+    >
+        <mat-icon>{{ isLightTheme() ? 'light_mode' : 'dark_mode' }}</mat-icon>
+    </button>
 </mat-toolbar>

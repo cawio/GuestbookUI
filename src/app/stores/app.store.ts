@@ -20,6 +20,7 @@ export const AppStore = signalStore(
         loggedIn: false,
         error: undefined as unknown | undefined,
         showDrawer: false,
+        isLightTheme: false,
     }),
     withMethods(
         (
@@ -77,6 +78,12 @@ export const AppStore = signalStore(
             },
             toggleDrawer() {
                 patchState(state, { showDrawer: !state.showDrawer() });
+            },
+            toggleTheme() {
+                patchState(state, { isLightTheme: !state.isLightTheme() });
+                state.isLightTheme()
+                    ? document.body.classList.add('light-theme')
+                    : document.body.classList.remove('light-theme');
             },
         })
     ),

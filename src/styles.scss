@@ -19,6 +19,18 @@ $GuestBookUI-warn: mat.define-palette(mat.$red-palette);
 
 // Create the theme object. A theme consists of configurations for individual
 // theming systems such as "color" or "typography".
+$GuestBookUi-light-theme: mat.define-light-theme(
+    (
+        color: (
+            primary: $GuestBookUI-primary,
+            accent: $GuestBookUI-accent,
+            warn: $GuestBookUI-warn,
+        ),
+        typography: mat.define-typography-config(),
+        density: 0,
+    )
+);
+
 $GuestBookUI-theme: mat.define-dark-theme(
     (
         color: (
@@ -45,6 +57,10 @@ body {
 body {
     margin: 0;
     font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
+
+body.light-theme {
+    @include mat.all-component-colors($GuestBookUi-light-theme);
 }
 
 .mat-mdc-snack-bar-container {
