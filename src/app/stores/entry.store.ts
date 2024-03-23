@@ -84,6 +84,38 @@ export const EntryStore = signalStore(
                     patchState(state, { loading: false });
                 }
             },
+            async updateEntry(entry: EntryDTO) {
+                const likedAlready = JSON.parse(
+                    localStorage.getItem('likedIds') || '[]'
+                ).includes(entry.id);
+
+                if (likedAlready) {
+                    snackbar.open('You already liked this entry');
+                    return;
+                }
+
+                try {
+                    patchState(state, { loading: true, error: '' });
+                    const updatedEntry = await firstValueFrom(
+                        entryService.updateEntry(entry)
+                    );
+                    localStorage.setItem(
+                        'likedIds',
+                        JSON.stringify([
+                            ...JSON.parse(
+                                localStorage.getItem('likedIds') || '[]'
+                            ),
+                            entry.id,
+                        ])
+                    );
+                    patchState(state, addEntity(updatedEntry));
+                } catch (error: unknown) {
+                    patchState(state, { error: error });
+                    snackbar.open('Error liking entry');
+                } finally {
+                    patchState(state, { loading: false });
+                }
+            },
         })
     ),
     withHooks({
