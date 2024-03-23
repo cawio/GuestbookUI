@@ -11,6 +11,8 @@
             <app-guestbook-entry
                 [entry]="value.entry"
                 [maxContentHeight]="rowHeight * value.rows - 120"
+                [likeable]="true"
+                (likeEntry)="onLike($event)"
             ></app-guestbook-entry>
         </mat-grid-tile>
     }

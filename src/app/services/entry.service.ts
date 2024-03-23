@@ -43,7 +43,10 @@ export class EntryService {
         });
     }
 
-    updateEntry(entry: EntryDTO): Observable<EntryDTO> {
-        return this.http.put<EntryDTO>(`${this.apiUrl}/entry/`, entry);
+    likeEntry(entry: EntryDTO): Observable<EntryDTO> {
+        return this.http.put<EntryDTO>(
+            `${this.apiUrl}/entry/${entry.id}/like`,
+            entry
+        );
     }
 }

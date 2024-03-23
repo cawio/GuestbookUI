@@ -79,6 +79,7 @@ export class GuestbookEntryCreatorComponent {
                 creatorName: name,
                 message: message,
                 creationTime: new Date(),
+                likes: 0,
             })
             .then(() => {
                 this.router.navigate(['/guestbook']);

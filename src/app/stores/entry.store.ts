@@ -11,6 +11,7 @@ import {
     addEntities,
     addEntity,
     removeEntities,
+    updateEntity,
     withEntities,
 } from '@ngrx/signals/entities';
 import { firstValueFrom } from 'rxjs';
@@ -84,7 +85,7 @@ export const EntryStore = signalStore(
                     patchState(state, { loading: false });
                 }
             },
-            async updateEntry(entry: EntryDTO) {
+            async likeEntry(entry: EntryDTO) {
                 const likedAlready = JSON.parse(
                     localStorage.getItem('likedIds') || '[]'
                 ).includes(entry.id);
@@ -97,7 +98,7 @@ export const EntryStore = signalStore(
                 try {
                     patchState(state, { loading: true, error: '' });
                     const updatedEntry = await firstValueFrom(
-                        entryService.updateEntry(entry)
+                        entryService.likeEntry(entry)
                     );
                     localStorage.setItem(
                         'likedIds',
@@ -108,7 +109,13 @@ export const EntryStore = signalStore(
                             entry.id,
                         ])
                     );
-                    patchState(state, addEntity(updatedEntry));
+                    patchState(
+                        state,
+                        updateEntity({
+                            id: updatedEntry.id,
+                            changes: updatedEntry,
+                        })
+                    );
                 } catch (error: unknown) {
                     patchState(state, { error: error });
                     snackbar.open('Error liking entry');

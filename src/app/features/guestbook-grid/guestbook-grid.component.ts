@@ -60,6 +60,10 @@ export class GuestbookGridComponent implements OnInit {
             this.cols.set(4);
         }
     }
+
+    onLike(entry: EntryDTO) {
+        this.entryStore.likeEntry(entry);
+    }
 }
 
 export type EntryDTOWrapper = {

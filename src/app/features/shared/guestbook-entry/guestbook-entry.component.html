@@ -1,8 +1,27 @@
 @if (entry) {
     <mat-card>
         <mat-card-header>
-            <mat-card-title>{{ entry.title }}</mat-card-title>
+            <mat-card-title class="title-nowrap">{{
+                entry.title
+            }}</mat-card-title>
             <mat-card-subtitle>{{ entry.creatorName }}</mat-card-subtitle>
+            <button
+                mat-icon-button
+                [color]="entry.likes > 0 ? 'warn' : 'accent'"
+                [hidden]="!likeable"
+                (click)="onLike()"
+                class="like-button"
+            >
+                <mat-icon
+                    [matBadge]="entry.likes"
+                    [matBadgeHidden]="entry.likes < 1"
+                    [matBadgeColor]="'accent'"
+                    [matBadgeSize]="'small'"
+                    [matBadgePosition]="'above after'"
+                >
+                    favorite
+                </mat-icon>
+            </button>
         </mat-card-header>
         <mat-card-content [style.maxHeight]="contentHeight">
             <p>{{ entry.message }}</p>
