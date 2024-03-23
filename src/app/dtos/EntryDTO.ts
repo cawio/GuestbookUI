@@ -4,4 +4,5 @@ export type EntryDTO = {
     creatorName: string;
     message: string;
     creationTime: Date;
+    likes: number;
 };
